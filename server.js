@@ -2,7 +2,7 @@ const express  = require('express');
 const serverConfig = require('./configs/server.config');
 const mongoose = require('mongoose');
 const dbConfig = require('./configs/db.config');
-
+const userModel = require('./models/user.model');
 
 const app = express();
 
@@ -20,9 +20,36 @@ db.on("error", ()=>{
 
 db.once("open", ()=>{
     console.log("DB is connected");
+
+    init();
 })
 
+async function init(){
+    /**
+     * Intialize the mongo db
+     * Need to create ADMIN user
+     */
 
+    let admin = await userModel.findOne({
+        userId: "hemant14050"
+    });
+
+    if(admin){
+        console.log("Admin user already exists");
+    }
+    else{
+        admin = await userModel.create({
+            name: "Hemant Patil",
+            userId: "hemant14050",
+            email: "hemant@gmail.com",
+            userType: "ADMIN",
+            password: "hemant"
+        });
+    
+        console.log(admin);
+        console.log("Admin created successfully");
+    }
+}
 
 app.listen(serverConfig.PORT, ()=>{
     console.log(`server started on the port number ${serverConfig.PORT}` );

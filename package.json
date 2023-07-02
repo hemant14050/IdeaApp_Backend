@@ -1,0 +1,15 @@
+{
+  "name": "pw_workshop",
+  "version": "0.0.1",
+  "description": "Workshop Codes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hemant Patil",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1"
+  }
+}
